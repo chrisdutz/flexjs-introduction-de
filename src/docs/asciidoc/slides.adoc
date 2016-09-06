@@ -19,6 +19,18 @@ WARNING: Die Informationen auf dieser Präsentation spiegelt die
 Meinung der Autoren wider und nicht zwangsläufig die der Apache
 Software Foundation oder der Firma codecentic.
 
+== Wer bin ich?
+
+image::christofer-dutz.png[float=right]
+
+* Christofer Dutz
+* Senior IT Consultant
+* codecentric AG
+* Apache Member
+* Apache Flex Committer & PMC
+* Flexmojos Lead Developer
+* Open-Source enthusiast
+
 == Apache Flex
 
 * Framework zum Entwickeln von Rich Internet Applications (RIAs)
