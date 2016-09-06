@@ -1,0 +1,560 @@
+// Don't center the slides vertically
+:revealjs_center: false
+// Display the current slide number in the bottom right
+:revealjs_slidenumber: true
+// The slide-id is added to the browser-url allowing to reload to the same page
+:revealjs_history: true
+
+== !
+
+image::flexjs-logo-light.png[]
+
+Christofer Dutz <christofer.dutz@codecentric.de>
+
+2016-09-08
+
+== Disclaimer
+
+WARNING: Die Informationen auf dieser Präsentation spiegelt die
+Meinung der Autoren wider und nicht zwangsläufig die der Apache
+Software Foundation oder der Firma codecentic.
+
+== Apache Flex
+
+* Framework zum Entwickeln von Rich Internet Applications (RIAs)
+* Lösungen laufen im Flashplayer oder Air Runtime
+* Flex + Flash äquivalent zu Appletts im Browser
+* Flex + Air äquivalent zu Java Programmen in der JVM
+* Code wird in ActionScript3 geschrieben
+* Markup wird in MXML geschrieben
+* Styling mit CSS
+
+== ECMAScript
+
+* ECMAScript 1: 06.1997
+* ECMAScript 2: 06.1998
+* ECMAScript 3: 12.1999
+* ECMAScript 4: 10.2008
+** Nie offiziell veröffentlicht
+* ECMAScript 5 (aka 3.1): 12.2009
+* ECMAScript 6: 06.2015
+* ECMAScript 7: 06.2016
+
+== ECMAScript 4
+
+image::joda-source.png[]
+
+== ECMAScript 5 (aka 3.1)
+
+* Einführung des "strict mode"
+* Genaueres Error Checking
+* Getters / Setters
+* JSON Unterstützung in Bibliothek
+* Erweiterte Reflection auf Object Properties
+
+== ECMAScript 5 (aka 3.1)
+
+image::js5-booring.gif[]
+
+== ECMAScript 6
+
+* Einführung von Klassen
+* Einführung von Modulen
+* Einführung von Iteratoren
+* Einführung von "For (of) Loops"
+* Einführung von "Arrow Functions"
+* Einführung von "Typed Arrays"
+
+[NOTE.speaker]
+--
+* For (of) Loops: For-Each-In loop
+* Arrow Functions: Ähnlich Java Lambda Expressions
+* Typed Arrays: Verbesserter Umgang mit Binary Data
+--
+
+== ECMAScript 6 (Fortsetzung)
+
+* Einführung von "Collections"
+** Maps, Sets und Weak Maps
+* Einführung von "Promises"
+* Erweiterte Reflection
+* Einführung von Proxies
+
+[NOTE.speaker]
+--
+* Collections: Maps, Sets und Weak Maps
+* Promises: Schönerer Umgang mit Callbacks
+* Reflection: Unterstützung von Klassen
+--
+
+== ECMAScript 6 (Fortsetzung)
+
+image::now-were-talking.png[]
+
+== ECMAScript 6 (Fortsetzung)
+
+* Hat nur 18 Jahre gedauert ...
+* Passende Bibliotheken max 1 Jahr alt
+
+== ECMAScript 7
+
+* Feinschliff der neuen ECMAScript 6 features
+* Array.prototype.includes (['a', 'b', 'c'].includes('a') -> true)
+* Exponentiation Operator (x ** y == Math.pow(x, y))
+
+== ECMAScript 7
+
+image::hooray.jpg[]
+
+== ActionScript3
+
+* ActionScript3 is einzige Implementation von ECMAScript 4
+* Einfühung von:
+** Klassen / Interfaces
+** Packages
+** E4X (ECMAScript for XML)
+** ...
+
+== ActionScript3 (Fortsetzung)
+
+* Nicht unterstütze ECMAScript 7 Features:
+** "Arrow Functions"
+
+* Zusätzliche Features:
+** Starke Typisierung
+** Interfaces
+** Packages
+** public/private/protected Zugriffe
+** ...
+
+== MXML
+
+* XML Format
+* Erleichterte Komposition von Komponenten
+* Bindings
+* States
+* Kann ActionScript Codeblöcke enthalten
+* Wird vom Compiler in ActionScript übersetzt
+
+[NOTE.speaker]
+--
+* Bindings: Automatisches aktualisieren von Properties, wenn sich der Wert ändert.
+* States: Definition von Properties mit State-Suffix (width.small="100" width.default="200" width.large="400")
+* MXML & ActionScript vergleichbar mit "JSP & Servlet"
+--
+
+[data-background="images/code.jpg"]
+== !!! CODE !!!
+
+== MXML Beispiel (Binding)
+
+[source,xml]
+----
+<s:Application ...>
+  <fx:Script>
+    [Bindable]
+    private var coolText:String = "Default Text";
+
+    protected function onButtonClick(event:MouseEvent):void {
+        coolText = "Button Clicked";
+    }
+  </fx:Script>
+  <s:VGroup>
+    <s:Button label="Change Text" click="onButtonClick(event)"/>
+    <s:TextInput text="@{coolText}"/>
+    <s:Label text="{coolText}"/>
+  </s:VGroup>
+</s:Application>
+----
+
+== MXML Beispiel (States)
+
+[source,xml]
+----
+<s:Application ...>
+  <s:states>
+    <s:State name="default"/>
+    <s:State name="mobile"/>
+  </s:states>
+  <fx:Script>
+    protected function onGoMobileClick(event:MouseEvent):void {
+      currentState = "mobile"
+    }
+  </fx:Script>
+  <s:VGroup>
+    <s:Button label="Go Mobile" click="onGoMobileClick(event)"/>
+    <s:TextInput width="120" width.mobile="80" text="Some Text"/>
+  </s:VGroup>
+</s:Application>
+----
+
+== MXML Beispiel (States) (Fortsetzung)
+
+[source,xml]
+----
+<s:Application ...>
+  <s:states>
+    <s:State name="default"/>
+    <s:State name="mobile"/>
+  </s:states>
+  <fx:Script>
+    ...
+  </fx:Script>
+  <s:HGroup excludeFrom="mobile">
+    <s:Button label="Go Mobile" click="onGoMobileClick(event)"/>
+    <s:TextInput width="120" text="Some Text"/>
+  </s:HGroup>
+  <s:VGroup includeIn="mobile">
+    <s:Button label="Go Desktop" click="onGoDesktopClick(event)"/>
+    <s:TextInput width="80" text="Some Text"/>
+  </s:VGroup>
+</s:Application>
+----
+
+== Weitere Flex Features
+
+* Unit-Test Unterstützung
+* Integration-Test Unterstützung
+* Debuggen aus der IDE
+* Profiler
+* Tooling
+** SonarQube Unterstütung
+** PMD Unterstützung
+** ...
+
+== Third Party Libraries
+
+* Gigantische Auswahl an existierenden Bibliotheken
+** Testing
+** Logging
+** IoC/MVC
+** (3D) Grafik
+** Charts
+** ...
+
+== Flex Rocks!
+
+image::noone-likes-flash.jpg[]
+
+== Apache FlexJS
+
+* Neuer Compiler
+* Reimplementation des Flex SDK
+** Altlasten über Bord geworfen
+** Einführen neuer Konzepte
+* Ausgabe des Compilers:
+** Flash/Air
+** HTML
+** ...
+
+[NOTE.speaker]
+--
+* Prinzipiell erweiterbar auf andere Ausgabeformate
+--
+
+== Flex -> Flash
+
+[ditaa,asciidoctor-diagram-classic]
+....
++-----------------+     +----------------+
+|                 |     |                |
+|   source-code   |     | Flex framework |
+|              {d}|     |                |
++--------------+--+     +--+-------------+
+               |           |
+               v           v
+           +-------------------+
+           |                   |
+           |  FlexJS Compiler  |
+           |                   |
+           +---------+---------+
+                     |
+                     v
+           +-------------------+
+           |                   |
+           | Flash application |
+           |                   |
+           +---------+---------+
+                     |
+                     v
+           +-------------------+
+           |                   |
+           |    FlashPlayer    |
+           |                   |
+           +-------------------+
+....
+
+== FlexJS -> Flash & HTML
+
+[ditaa,asciidoctor-diagram-flexjs]
+....
++-----------------+     +------------------+
+|                 |     |                  |
+|   source-code   |     | FlexJS framework |
+|              {d}|     |                  |
++--------------+--+     +--+---------------+
+               |           |
+               v           v
+           +-------------------+
+           |                   |
+           |  FlexJS Compiler  |
+           |                   |
+           +---------+---------+
+               |           |
+               v           v
++-----------------+     +-----------------+
+|                 |     |                 |
+| Flash appl.     |     | HTML appl.      |
+|                 |     |                 |
++-----------------+     +-----------------+
+         |                       |
+         v                       v
++-----------------+     +-----------------+
+|                 |     |                 |
+| FlashPlayer     |     | Web Browser     |
+|                 |     |                 |
++-----------------+     +-----------------+
+....
+
+== JavaScript in ActionScript3 -> HTML
+
+[ditaa,asciidoctor-diagram-javascript]
+....
++-----------------+   +----------------+   +----------------+
+|                 |   |                |   |                |
+|   source-code   |   |    Typedefs    |   |   JS Library   |
+|              {d}|   |                |   |                |
++---------------+-+   +--------+-------+   +-+--------------+
+                |              |             |
+                v              v             v
+               +------------------------------+
+               |                              |
+               |  FlexJS Compiler             |
+               |                              |
+               +---------------+--------------+
+                               |
+                               v
+               +------------------------------+
+               |                              |
+               |  HTML Application            |
+               |                              |
+               +---------------+--------------+
+                               |
+                               v
+               +------------------------------+
+               |                              |
+               |  Web Browser                 |
+               |                              |
+               +------------------------------+
+....
+
+[NOTE.speaker]
+--
+* Überraschenderweise vergleichsweise sehr hohe Anzahl von Usern, die diese Option nutzen auf der Mailingliste
+--
+
+== FlexJS Überblick
+
+* Core Bibliothek
+** Bereitstellung von Komponenten
+** Kompilierbar nach HTML und Flash
+* Übernahme der guten Konzepte
+** MXML
+** Binding
+** States
+** Event-Handling
+
+[NOTE.speaker]
+--
+* Mehrphasige Initialisierung:
+** invalidateProperties --> commitProperties
+** invalidateSize --> validateSize
+** invalidateDisplayList --> validateDisplayList
+** Keine "Event-Gewitter"
+--
+
+== FlexJS Überblick (Fortsetzung)
+
+* Konzentration auf Effizienz
+** JS-First Ansatz
+** Keine Monster-Klassen
+*** Altes Flex TextInput 19027 Zeilen Code
+*** Neues Flex TextInput 2399 Zeilen Code
+** "Strands" und "Beads"
+*** "Pay as you go" Konzept
+
+[NOTE.speaker]
+--
+* JS-First Ansatz: Funktionalität, sodass Flash & JS Performant sind, wenn dies mal nicht möglich ist, wird performanz für JS bevorzugt.
+* Neue Code-Zeilen Zahl enthält sowohl conditionale HTML als auch Flash blöcke
+--
+
+[data-background="images/strands-and-beads.jpg"]
+== !
+
+== Strands & Beads
+
+* Basiskomponente so leichtgewichtig wie möglich
+* Basiskomponente = Strand (Engl.)
+* Hinzufügen von Funktionalität durch Beads
+* Composition statt Vererbung
+* Kein unnützer Code in der Applikation
+
+== Strands & Beads (Beispiel)
+
+Normales (FlexJS) TextInput Feld:
+
+[graphviz, text-input-simple, png]
+----
+digraph simple {
+    TextModelBead -> TextInputView
+    TextInputView -> KeyboardControllerBead
+}
+----
+
+[NOTE.speaker]
+--
+TextInputView verwendet bei Flash ein Flash-TextField und bei HTML ein <input> HTML Element
+--
+
+== Strands & Beads (Beispiel)
+
+Erweitertes (FlexJS) Text-Input Feld:
+
+[graphviz, text-input-extended, png]
+----
+digraph extended {
+    TextModelBead          -> TextInputView
+    TextInputView          -> KeyboardControllerBead
+    KeyboardControllerBead -> PasswordInputBead
+    PasswordInputBead      -> TextPromptBead
+}
+----
+
+[NOTE.speaker]
+--
+* PasswordInputBead maskiert die Eingabe mit Sternchen
+* TextPromptBead gibt einen Text aus, wenn das Textfeld leer ist
+--
+
+== Strands & Beads (Beispiel)
+
+Code Beispiel (MXML):
+
+[source,xml]
+----
+<basic:TextInput>
+    <basic:beads>
+        <basic:PasswordInputBead />
+        <based:TextPromptBead prompt=”password” />
+    </basic:beads>
+</basic:TextInput>
+----
+
+[NOTE.speaker]
+--
+* PasswordInputBead maskiert die Eingabe mit Sternchen
+* TextPromptBead gibt einen Text aus, wenn das Textfeld leer ist
+--
+
+== Typedefs
+
+// TODO: Hier noch mehr schreiben ...
+
+== Maven Build
+
+// TODO: Hier noch mehr schreiben ...
+
+== Frameworks
+
+* Weiterverwendung von ActionScript3 Bibliotheken (Auszug)
+** Parsley (IoC und Messaging Framework)
+** PureMVC (MVC Framework)
+** FlexORM (EntityManger ala JPA für Flex)
+** AlivePDF (Clientseitige PDF Generierung)
+** as3-commons-aop, as3-commons-lang, as3-commons-logging, ...
+** ...
+
+[NOTE.speaker]
+--
+* Libs für so ziemlich alles verfügbar.
+* Einiges direkt Einsatzbereit in FlexJS (Nicht-UI)
+* UI Frameworks oft mit recht geringem Aufwand zu portieren
+--
+
+[data-background="images/presents.jpg"]
+== !
+// TODO: Add a link to: https://commons.wikimedia.org/wiki/File:Christmas_presents_under_the_tree_(11483648553).jpg
+
+== Aktuelle Arbeit im Projekt
+
+* Aktuell 10. größtes Apache Projekt
+
+* Aktuelle Version: 0.7.0 (diese Woche released)
+** Umstellen von Ant -> Maven
+** Neues FlexJS-Maven-Plugin
+** Viele Bugfixes und Optimierungen
+
+[NOTE.speaker]
+--
+* 10. Größtes Projekt von der Anzahl der Comitter her
+--
+
+== Zukünftige Arbeit im Projekt
+
+* Kommendes
+** Implementation fehlender Features
+** Stabilisierung
+** Bugfixes
+** Ausbau des Maven Supports
+** AMF Support in JavaScript
+** (Generics, Arrow-Functions)
+
+[NOTE.speaker]
+--
+* Steigende Anzahl von Malinglist Posts und Commits durch zunehmende Anzahl von Unternehmen, die von Flex auf FlexJS umstellen.
+* Maven unterstützt die Flex/FlexJS Scopes nur ungenügend, abhilfe könnte hier Maven pom 4.1 oder Apache Aether bringen (Aktuell in der Diskussion)
+* Generics & Arrow Functions würden eine Anpassung der ActionScript3 Sprache erfordern (ActionScript3.1 oder ActionScript4)
+--
+
+[data-background="images/flexible.jpg"]
+== Vielen Dank
+
+* Fragen?
+
+== FlexJS vs TypeScript
+
+* In den meißten Features identisch
+** Einsatz von "Typedefs" um stark typisiert mit JavaScript bibliotheken zu arbeiten
+** Kompilieren nach JavaScript
+** Klassen, Interfaces, Packages
+** Starke Typisierung
+
+== FlexJS vs TypeScript (Fortsetzung)
+
+* Coole Features, die nur in TypeScript verfügbar sind
+** Method/Constructor overloading (Anzahl von Argumenten) *
+** "Arrow Functions" (Lambda-(like)-Functions) "=>"
+** Enum Types
+** Generic Types and Functions
+
+== FlexJS vs TypeScript (Fortsetzung)
+
+* Weniger coole Features, die nur in TypeScript verfügbar sind
+** "Structural Subtyping" (Keine Exception, wenn die Properties passen)
+** UnionTypes (var x: string | number;)
+** Intersection Types (var ab: A & B = { a: 1, b: 1 };)
+
+[NOTE.speaker]
+--
+* Method/Construktor Overloading scheint nur anhand der Anzahl von Argumenten zu gehen. Es ist nicht möglich mehrere Funktionen/Construktoren mit dem gleichen namen und der gleichen Anzahl von Argumenten zu definieren.
+--
+
+== FlexJS vs TypeScript (Fortsetzung)
+
+* Features, die nur in FlexJS verfügbar sind
+** MXML
+** Output als Flash/Air/Native
+** Kein Wrapper für Hardware-Zugriff nötig
+** ANE (Air Native Extensions)
+** ...

@@ -1,0 +1,16 @@
+= ASF Roadshow - FlexJS Introduction
+
+== Usage
+
+Build the slides using Maven
+
+ $ mvn
+
+Open the file _target/generated-slides/slides.html_ in your browser to see the generated HTML file containing the presentation deck.
+
+== Remarks
+
+In order to generate the diagrams, GraphVIS needs to be installed locally. Get it from: http://www.graphviz.org/
+
+The template is adjusted to use the codecentric font Panton, so be sure to have that installed on your presentation machine.
+Any css adjustments can go to "src/main/theme/cc.css" as this is automatically embedded into the themes directory.
