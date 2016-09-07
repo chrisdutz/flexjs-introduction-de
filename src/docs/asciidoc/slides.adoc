@@ -103,10 +103,11 @@ image::js5-booring.gif[]
 
 image::now-were-talking.png[]
 
-== ECMAScript 6 (Fortsetzung)
-
+[NOTE.speaker]
+--
 * Hat nur 18 Jahre gedauert ...
 * Passende Bibliotheken max 1 Jahr alt
+--
 
 == ECMAScript 7
 
@@ -179,6 +180,13 @@ image::hooray.jpg[]
 </s:Application>
 ----
 
+[NOTE.speaker]
+--
+* Sowie text im Eingabefeld eingetippt wird, aktualisiert sich das Label
+* Sowie auf den Button geklickt wird, aktualisieren sich TextFeld und Label
+* @-Notation für Bi-Direktionales Binding
+--
+
 == MXML Beispiel (States)
 
 [source,xml]
@@ -199,6 +207,12 @@ image::hooray.jpg[]
   </s:VGroup>
 </s:Application>
 ----
+
+[NOTE.speaker]
+--
+* Im Zustand "default" gilt die width=120 im Zustand "mobile" gilt width=80
+* Umschalten in den "mobile" mode durch klick auf den Button
+--
 
 == MXML Beispiel (States) (Fortsetzung)
 
@@ -223,13 +237,18 @@ image::hooray.jpg[]
 </s:Application>
 ----
 
+[NOTE.speaker]
+--
+* Mit includeIn/excludeFrom können explizit komponenten nur in bestimmten States angezeigt/ausgeblendet werden.
+--
+
 == Weitere Flex Features
 
 * Unit-Test Unterstützung
 * Integration-Test Unterstützung
 * Debuggen aus der IDE
 * Profiler
-* Tooling
+* Weiteres Tooling
 ** SonarQube Unterstütung
 ** PMD Unterstützung
 ** ...
@@ -379,9 +398,9 @@ image::noone-likes-flash.jpg[]
 [NOTE.speaker]
 --
 * Mehrphasige Initialisierung:
-** invalidateProperties --> commitProperties
-** invalidateSize --> validateSize
-** invalidateDisplayList --> validateDisplayList
+** invalidateProperties -> commitProperties
+** invalidateSize -> validateSize
+** invalidateDisplayList -> validateDisplayList
 ** Keine "Event-Gewitter"
 --
 
@@ -547,11 +566,12 @@ http://matrix3d.github.io/assets/html5/flexjsstage3d/bin/js-release/#test_hugryh
 == Aktuelle Arbeit im Projekt
 
 * Aktuell 10. größtes Apache Projekt
-
 * Aktuelle Version: 0.7.0 (diese Woche released)
 ** Umstellen von Ant -> Maven
 ** Neues FlexJS-Maven-Plugin
 ** Viele Bugfixes und Optimierungen
+* Software Archäologie
+** Wiederbeleben "toter" Projekte
 
 [NOTE.speaker]
 --
