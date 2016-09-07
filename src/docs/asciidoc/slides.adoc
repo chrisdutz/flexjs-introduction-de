@@ -471,11 +471,61 @@ Code Beispiel (MXML):
 
 == Typedefs
 
-// TODO: Hier noch mehr schreiben ...
+* Nimmt bestehenden JavaScript Code als Input
+** Wichtig sind hier die JSDoc Annotationen
 
-== Maven Build
+----
+/**
+ * Contains properties and methods shared by all events for use with
+ * {{#crossLink "EventDispatcher"}}{{/crossLink}}.
+ *
+ * Note that Event objects are often reused, so you should never
+ * rely on an event object's state outside of the call stack it was received in.
+ *
+ * @see [Event]
+ * @param {string} type The event type.
+ * @param {(boolean|null)} bubbles Indicates whether the event will bubble through the display list.
+ * @param {(boolean|null)} cancelable Indicates whether the default behaviour of this event can be cancelled.
+ * @constructor
+ */
+createjs.Event = function (type, bubbles, cancelable) {}
+----
 
-// TODO: Hier noch mehr schreiben ...
+== Typedefs (Fortsetzung)
+
+* Generiert daraus ActionScript code:
+
+----
+package createjs {
+
+...
+
+public class Event {
+
+    ...
+
+    public function Event(type:String, bubbles:Boolean, cancelable:Boolean) {
+        super();
+    }
+
+...
+----
+
+== Typedefs (Fortsetzung)
+
+* Mithilfe der AS Typedefs kann:
+** Compiler zur Compile-Zeit Fehler entdecken
+** Code Analyse Tools Probleme entdecken
+** IDEs Content-Assist liefern
+* Stark typisierter Code für JS Libraries geschrieben werden
+
+== Beispiele
+
+* HungyHero
+
+image::hungryhero.png[]
+
+http://matrix3d.github.io/assets/html5/flexjsstage3d/bin/js-release/#test_hugryhero
 
 == Frameworks
 
@@ -493,10 +543,6 @@ Code Beispiel (MXML):
 * Einiges direkt Einsatzbereit in FlexJS (Nicht-UI)
 * UI Frameworks oft mit recht geringem Aufwand zu portieren
 --
-
-[data-background="images/presents.jpg"]
-== !
-// TODO: Add a link to: https://commons.wikimedia.org/wiki/File:Christmas_presents_under_the_tree_(11483648553).jpg
 
 == Aktuelle Arbeit im Projekt
 
@@ -530,9 +576,7 @@ Code Beispiel (MXML):
 --
 
 [data-background="images/flexible.jpg"]
-== Vielen Dank
-
-* Fragen?
+== Fragen?
 
 == FlexJS vs TypeScript
 
