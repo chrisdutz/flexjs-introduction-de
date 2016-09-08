@@ -538,6 +538,12 @@ public class Event {
 ** IDEs Content-Assist liefern
 * Stark typisierter Code für JS Libraries geschrieben werden
 
+[NOTE.speaker]
+--
+* Direkt mitgelieferte TypeDefs: Google Closure, Node, JQuery, Jasmine, CreateJS, Google Maps, Cordova
+* Weitere jeder Zeit möglich
+--
+
 == Beispiele
 
 * HungyHero
@@ -581,12 +587,12 @@ http://matrix3d.github.io/assets/html5/flexjsstage3d/bin/js-release/#test_hugryh
 == Zukünftige Arbeit im Projekt
 
 * Kommendes
+** Dokumentation
 ** Implementation fehlender Features
 ** Stabilisierung
 ** Bugfixes
 ** Ausbau des Maven Supports
 ** AMF Support in JavaScript
-** (Generics, Arrow-Functions)
 
 [NOTE.speaker]
 --
