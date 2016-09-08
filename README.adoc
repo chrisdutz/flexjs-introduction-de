@@ -1,4 +1,4 @@
-= ASF Roadshow - FlexJS Introduction
+= FlexJS Introduction
 
 == Usage
 
